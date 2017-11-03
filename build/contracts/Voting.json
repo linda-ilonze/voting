@@ -1,0 +1,178 @@
+{
+  "contract_name": "Voting",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "noOfCandidates",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "candidateName",
+          "type": "bytes32"
+        }
+      ],
+      "name": "addCandidate",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "candidate",
+          "type": "bytes32"
+        }
+      ],
+      "name": "totalVotesFor",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "candidate",
+          "type": "bytes32"
+        }
+      ],
+      "name": "validCandidate",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "votesReceived",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "candidateList",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "candidate",
+          "type": "bytes32"
+        }
+      ],
+      "name": "voteForCandidate",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "candidateNames",
+          "type": "bytes32[]"
+        }
+      ],
+      "payable": false,
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "candidate",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "totalVotes",
+          "type": "uint8"
+        }
+      ],
+      "name": "Vote",
+      "type": "event"
+    }
+  ],
+  "unlinked_binary": "0x6060604052341561000f57600080fd5b6040516104293803806104298339810160405280805190910190505b600181805161003e929160200190610046565b505b506100b5565b828054828255906000526020600020908101928215610083579160200282015b828111156100835782518255602090920191600190910190610066565b5b50610090929150610094565b5090565b6100b291905b80821115610090576000815560010161009a565b5090565b90565b610365806100c46000396000f300606060405236156100805763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663183531a18114610085578063230d6ed8146100aa5780632f265cf7146100c2578063392e6678146100ee5780637021939f14610118578063b13c744b14610144578063cc9ab2671461016c575b600080fd5b341561009057600080fd5b610098610184565b60405190815260200160405180910390f35b34156100b557600080fd5b6100c060043561018b565b005b34156100cd57600080fd5b6100d86004356101b3565b60405160ff909116815260200160405180910390f35b34156100f957600080fd5b6101046004356101e2565b604051901515815260200160405180910390f35b341561012357600080fd5b6100d8600435610234565b60405160ff909116815260200160405180910390f35b341561014f57600080fd5b610098600435610249565b60405190815260200160405180910390f35b341561017757600080fd5b6100c060043561026c565b005b6001545b90565b6001805480820161019c83826102ee565b916000526020600020900160005b50829055505b50565b60006101be826101e2565b15156101c957600080fd5b5060008181526020819052604090205460ff165b919050565b6000805b60015481101561022957600180548491908390811061020157fe5b906000526020600020900160005b50541415610220576001915061022e565b5b6001016101e6565b600091505b50919050565b60006020819052908152604090205460ff1681565b600180548290811061025757fe5b906000526020600020900160005b5054905081565b6000610277826101e2565b151561028257600080fd5b5060008181526020819052604090819020805460ff198116600160ff928316018216179182905516907f97be127af7f06b8dc342e8f8eafb7fddb7ddeb9e24b1de5c33697f79a3abd8e290839083905191825260ff1660208201526040908101905180910390a15b5050565b81548183558181151161031257600083815260209020610312918101908301610318565b5b505050565b61018891905b80821115610332576000815560010161031e565b5090565b905600a165627a7a723058206321d81e9b8b0ab4fa7b638fac17ccfc3df8b929987489aa9b2be8135ed2e1470029",
+  "networks": {
+    "1508280255574": {
+      "events": {},
+      "links": {},
+      "address": "0x3d633b3bc23e32bba3f843da9f34418745653caf",
+      "updated_at": 1508285102101
+    },
+    "1509487168138": {
+      "events": {
+        "0x97be127af7f06b8dc342e8f8eafb7fddb7ddeb9e24b1de5c33697f79a3abd8e2": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "candidate",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "name": "totalVotes",
+              "type": "uint8"
+            }
+          ],
+          "name": "Vote",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xcc86457c6c9c12fcf18574806689d8ee783a4bf2",
+      "updated_at": 1509502462643
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1509502462643
+}

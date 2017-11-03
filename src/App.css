@@ -1,0 +1,10 @@
+input[type="radio"] {
+    display:none;
+}
+input[type="radio"] + label {
+    content: '\2714';
+    text-indent: .9em;
+    color: #333;
+    background-color: #ccc;
+  }
+  
