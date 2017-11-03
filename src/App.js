@@ -5,7 +5,6 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import {Card, CardBody, CardText, CardTitle,CardSubtitle, Col, Container, Input, Row} from 'reactstrap';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/fontawesome-free-solid';
-import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -132,7 +131,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <Container>
+      <Container className="bg-light" >
         <Row className="justify-content-sm-center">
           <h1 className="display-4 pb-4"> Blockchain Voting System </h1>
         </Row>
@@ -142,7 +141,7 @@ class App extends Component {
             return (
               <Col sm={{ size: 3}} className="justify-content-sm-center" key={candidateKey}>
                   <Card  body className="text-center" >
-                    <CardBody  >
+                    <CardBody>
                       <FontAwesomeIcon icon={faUser} size="5x" /> 
                       <CardTitle> {candidateKey} </CardTitle>
                       <CardSubtitle> Party </CardSubtitle>
