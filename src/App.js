@@ -23,9 +23,6 @@ class App extends Component {
   }
 
   componentWillMount() {
-    // Get network provider and web3 instance.
-    // See utils/getWeb3 for more info.
-
    getWeb3
     .then(results => {
       this.setState({
@@ -42,8 +39,6 @@ class App extends Component {
 
   instantiateContract() {
     /*
-     * SMART CONTRACT EXAMPLE
-     *
      * Normally these functions would be called in the context of a
      * state management library, but for convenience I've placed them here.
      */
