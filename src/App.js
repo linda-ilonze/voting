@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import VotingContract from '../build/contracts/Voting.json'
 import getWeb3 from './utils/getWeb3'
-import '../node_modules/bootstrap/dist/css/bootstrap.css';
-import {Card, CardBody, CardText, CardTitle,CardSubtitle, Col, Container, Input, Row} from 'reactstrap';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/fontawesome-free-solid';
+
+import ProgressButton from 'react-progress-button';
+import {Card, CardBody, CardText, CardTitle,CardSubtitle, Col, Container, Row} from 'reactstrap';
+
+import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import "./css/react-progress-button.css";
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +19,9 @@ class App extends Component {
       fromAccount : null,
       candidates:{},
       votingContract:null,
-      voteFor : null
+      voteFor : null,
+      candidateButtonState:{},
+      blockLeft:null
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onCandidateChange = this.onCandidateChange.bind(this);
@@ -56,11 +62,18 @@ class App extends Component {
       });
     });
 
+    //Get initialisation data
     votingContract.deployed().then((instance) => {
         if(that.state.fromAccount === null) {
           console.log("FromAccount is null exiting");
           return;
         }
+
+        instance.getTimerCountdown.call(null, {from:that.state.fromAccount})
+        .then(result => {
+          console.log(result);
+          that.setState({blockLeft:result.c[0]});
+        })
 
         // 1. get number of candidates
         instance.noOfCandidates.call(null, {from:that.state.fromAccount})
@@ -76,6 +89,9 @@ class App extends Component {
             instance.totalVotesFor.call(candidateName,{from:that.state.fromAccount})
             .then(result => {
               that.setState({
+                candidateButtonState : {
+                  [candidateName] : ''
+                },
                 candidates:{
                   ...that.state.candidates,
                   [candidateName] : result.c[0]
@@ -117,13 +133,25 @@ class App extends Component {
       instance.voteForCandidate(that.state.voteFor, {from:that.state.fromAccount})
       .then(txnId =>{
         console.log(txnId);
+        that.setState({
+          candidateButtonState : {
+            [this.state.voteFor] : 'success'
+         }
+        });
       });
     })
 
   }
 
   onCandidateChange(event){
-    this.setState({voteFor:event.target.value});
+
+    const text = event.currentTarget.textContent.replace("Vote ", "");
+    this.setState({
+                  voteFor:text, 
+                  candidateButtonState : {
+                    [text]:'loading'
+                  }
+                  });
     this.handleSubmit(event);
 
   }
@@ -135,19 +163,23 @@ class App extends Component {
         <Row className="justify-content-sm-center">
           <h1 className="display-4 pb-4"> Blockchain Voting System </h1>
         </Row>
+        <Row>
+          Countdown block  {this.state.blockLeft}
+        </Row>
         <Row className="justify-content-sm-center">
           {
             Object.keys(this.state.candidates).map(candidateKey => {
             return (
-              <Col sm={{ size: 3}} className="justify-content-sm-center" key={candidateKey}>
-                  <Card  body className="text-center" >
+              <Col sm="4"  key={candidateKey} className="justify-content-sm-center">
+                  <Card className="text-center" >
                     <CardBody>
-                      <FontAwesomeIcon icon={faUser} size="5x" /> 
-                      <CardTitle> {candidateKey} </CardTitle>
-                      <CardSubtitle> Party </CardSubtitle>
-                      <CardText> Total: {this.state.candidates[candidateKey]}</CardText>
-                      <Input type="button" className="btn btn-primary" onClick={this.onCandidateChange} value={ candidateKey}> 
-                      </Input>
+                      <FontAwesomeIcon icon={faUser} size="5x"  /> 
+                      <CardTitle>{candidateKey} </CardTitle>
+                      <CardSubtitle> Total Votes : {this.state.candidates[candidateKey]} </CardSubtitle>
+                      <CardText> Voters Bio.......  </CardText>
+                      <ProgressButton onClick={this.onCandidateChange} state={this.state.candidateButtonState[candidateKey]} value={candidateKey}> 
+                        Vote {candidateKey}
+                      </ProgressButton>
                     </CardBody>
                   </Card>
               </Col>
@@ -155,11 +187,6 @@ class App extends Component {
             })
           }  
         </Row>
-        {/* <Row>
-          <Col sm={{ size: 10, offset: 2 }}>
-            <Button color="primary" onClick={this.handleSubmit}> Vote </Button>
-          </Col>
-        </Row> */}
         </Container>
       </div>        
     );
